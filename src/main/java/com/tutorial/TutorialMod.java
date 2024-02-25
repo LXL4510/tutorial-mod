@@ -1,7 +1,7 @@
 package com.tutorial;
 
+import com.tutorial.Item.CustomItem;
 import net.fabricmc.api.ModInitializer;
-
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -16,13 +16,14 @@ public class TutorialMod implements ModInitializer {
 	// That way, it's clear which mod wrote info, warnings, and errors.
     public static final Logger LOGGER = LoggerFactory.getLogger("tutorial-mod");
 	// 新物品的实例
-	public static final Item CUSTOME_ITEM = Registry.register(Registries.ITEM, new Identifier("tutorial", "custom_item"),
-        new Item(new FabricItemSettings()));
+	public static final Item CUSTOME_ITEM = new CustomItem(new FabricItemSettings());
+
 	@Override
 	public void onInitialize() {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
+		Registry.register(Registries.ITEM, new Identifier("tutorial", "custom_item"), CUSTOME_ITEM);
 		LOGGER.info("Hello My world!");
 	}
 }
